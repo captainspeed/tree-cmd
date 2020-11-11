@@ -3,13 +3,13 @@
 	"displayName": "tree-cmd",
 	"description": "",
 	"publisher": "captainspeed",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
 	"repository": "https://github.com/captainspeed/tree-cmd",
-    "icon": "resources/connection.png",
+	"icon": "resources/connection.png",
 	"categories": [
 		"Other"
 	],
@@ -19,14 +19,14 @@
 	"main": "./src/extension.js",
 	"contributes": {
 		"viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "tree-cmd-container",
-                    "title": "Tree cmd",
-                    "icon": "resources/connection.svg"
-                }
-            ]
-        },
+			"activitybar": [
+				{
+					"id": "tree-cmd-container",
+					"title": "Tree cmd",
+					"icon": "resources/connection.svg"
+				}
+			]
+		},
 		"views": {
 			"tree-cmd-container": [
 				{
@@ -55,21 +55,21 @@
 			]
 		},
 		"configuration": {
-            "type": "object",
-            "title": "tree-cmd",
-            "properties": {
-                "tree-cmd.settings.config": {
-                    "default": "",
-                    "markdownDescription": "config.js file to be use in tree-cmd.",
-                    "type": "string"
+			"type": "object",
+			"title": "tree-cmd",
+			"properties": {
+				"tree-cmd.settings.config": {
+					"default": "",
+					"markdownDescription": "config.js file to be use in tree-cmd.",
+					"type": "string"
 				},
 				"tree-cmd.settings.title": {
-                    "default": "tree-cmd",
-                    "markdownDescription": "Tree view title",
-                    "type": "string"
+					"default": "tree-cmd",
+					"markdownDescription": "Tree view title",
+					"type": "string"
 				}
-            }
-        }
+			}
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
