@@ -2,9 +2,9 @@
 
 This is a Visual Studio code extension. Useful for listing all your customised terminal commands in a tree-view mode.
 
-![Screenshot](media/screenshot1.png)
+![screenshot1](https://github.com/captainspeed/tree-cmd/blob/main/media/screenshot1.png?raw=true)
 
-![Screenshot](media/screenshot2.png)
+![screenshot2](https://github.com/captainspeed/tree-cmd/blob/main/media/screenshot2.png?raw=true)
 
 ## How to use
 
