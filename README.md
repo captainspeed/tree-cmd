@@ -2,6 +2,10 @@
 
 This is a Visual Studio code extension. Useful for listing all your customised terminal commands in a tree-view mode.
 
+![Screenshot1](https://github.com/captainspeed/tree-cmd/blob/main/media/screenshot1.png)
+
+![Screenshot2](https://github.com/captainspeed/tree-cmd/blob/main/media/screenshot2.png)
+
 ## How to use
 
 -   Install the extension "tree-cmd" from vscode extensions.
