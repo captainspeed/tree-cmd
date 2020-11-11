@@ -1,0 +1,90 @@
+{
+	"name": "tree-cmd",
+	"displayName": "tree-cmd",
+	"description": "",
+	"publisher": "captainspeed",
+	"version": "0.0.1",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"repository": "https://github.com/captainspeed/tree-cmd",
+    "icon": "resources/connection.png",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./src/extension.js",
+	"contributes": {
+		"viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "tree-cmd-container",
+                    "title": "Tree cmd",
+                    "icon": "resources/connection.svg"
+                }
+            ]
+        },
+		"views": {
+			"tree-cmd-container": [
+				{
+					"id": "tree-cmd",
+					"name": ""
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "tree-cmd.refresh",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/button-icons/light/refresh.svg",
+					"dark": "resources/button-icons/dark/refresh.svg"
+				}
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "tree-cmd.refresh",
+					"when": "view == tree-cmd",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+            "type": "object",
+            "title": "tree-cmd",
+            "properties": {
+                "tree-cmd.settings.config": {
+                    "default": "",
+                    "markdownDescription": "config.js file to be use in tree-cmd.",
+                    "type": "string"
+				},
+				"tree-cmd.settings.title": {
+                    "default": "tree-cmd",
+                    "markdownDescription": "Tree view title",
+                    "type": "string"
+				}
+            }
+        }
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.50.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.9.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	}
+}
