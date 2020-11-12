@@ -15,11 +15,12 @@ This is a Visual Studio code extension. Useful for listing all your customised t
 ```js
 const config = {
     // Your Extension title
-	title: "Build Services",
+    title: "Build Services",
+
     // This function should return list of commands in object - nested objects is supported aswell
     // i.e tree-view-items
     getTree() {
-		return {
+        return {
             "develop": {
                 "ide-server": {},
                 "test-file": {},
@@ -31,6 +32,7 @@ const config = {
                 "build-file1": {},
                 "copy-files": {}
             }
+        };
     },
     /**
      * Event that is fired when the selection has changed
@@ -69,25 +71,30 @@ const config = {
      *
      * }
      */
-	onClickItem(res, createTerminal, showMessage) {
+    onClickItem(res, createTerminal, showMessage) {
         // Do your logic here
         // Example:
-		if (res && res.parent) {
-			const label = `${res.parent} ` + res.key;
 
-			if (res.parent === "build") {
-				showMessage.warning(`Is doing build!`);
+        if (res && res.parent) {
+            const label = `${res.parent} ` + res.key;
+
+            if (res.parent === "build") {
+                showMessage.warning(`Is doing build!`);
             }
+
             // It creates and opens a separate terminal window
             const terminal = createTerminal({ name: label });
+
             showMessage.information(label);
+
             // commands to run in the terminal
-			terminal.sendText(`cd c:`);
+            terminal.sendText(`cd c:`);
             terminal.sendText(`do-check ${res.key} -v`);
+
             // display the terminal window
-			terminal.show();
-		}
-	}
+            terminal.show();
+        }
+    }
 };
 // export
 module.exports.config = config;
