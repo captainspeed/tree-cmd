@@ -3,7 +3,7 @@
 	"displayName": "tree-cmd",
 	"description": "",
 	"publisher": "captainspeed",
-	"version": "0.5.0",
+	"version": "0.7.1",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.50.0"
@@ -43,6 +43,10 @@
 					"light": "resources/button-icons/light/refresh.svg",
 					"dark": "resources/button-icons/dark/refresh.svg"
 				}
+			},
+			{
+				"command": "tree-cmd.clickItem",
+				"title": "Click Item"
 			}
 		],
 		"menus": {

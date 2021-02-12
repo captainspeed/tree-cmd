@@ -6,4 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- Initial release
+- Published version v0.7.1
+
+- Changed tree-view-items behaviour from onDidChangeSelection() to onClickItem() to allow multiple-clicks on same item.
+
+- And refactored code using Beautify-vscode-extension. 

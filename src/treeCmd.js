@@ -6,16 +6,16 @@ var nodes = {};
 var treeItemIconPath;
 
 const showMessage = {
-	information( message ) {
+	information(message) {
 		return vscode.window.showInformationMessage(message);
 	},
-	warning( message ) {
+	warning(message) {
 		return vscode.window.showWarningMessage(message);
 	},
-	error( message ) {
+	error(message) {
 		return vscode.window.showErrorMessage(message);
 	},
-	status( message ) {
+	status(message) {
 		return vscode.window.setStatusBarMessage(message);
 	}
 };
@@ -33,16 +33,21 @@ class TreeCmd {
 			this.refresh()
 		);
 
+		vscode.commands.registerCommand("tree-cmd.clickItem", (res) => {
+			this.onClickItem(res);
+		});
+
 		vscode.workspace.onDidChangeConfiguration(e => {
 			if (e.affectsConfiguration("tree-cmd.settings.config")) {
 				showMessage.information('Tree-cmd config updated');
 				this.refresh();
 			}
 			if (e.affectsConfiguration("tree-cmd.settings.title")) {
-				showMessage.information( `Tree-cmd view title updated to "${getSettings("title")}"` );
+				showMessage.information(`Tree-cmd view title updated to "${getSettings("title")}"`);
 				this.changeTitle();
 			}
 		});
+
 	}
 
 	createTreeView() {
@@ -52,16 +57,11 @@ class TreeCmd {
 		});
 		this.context.subscriptions.length = 0;
 		this.context.subscriptions.push(this.view);
-		this.onDidChangeSelection();
 	}
 
-	onDidChangeSelection() {
-		if ( this.view ) {
-			this.view.onDidChangeSelection( e => {
-				if (config) {
-					config.onClickItem(e.selection[0], this.createTerminal, showMessage);
-				}
-			});
+	onClickItem(selection) {
+		if (this.view && config) {
+			config.onClickItem(selection, this.createTerminal, showMessage);
 		}
 	}
 
@@ -91,9 +91,9 @@ function aNodeWithIdTreeDataProvider() {
 	return {
 		getChildren: (element) => {
 			let parent =
-				element !== undefined && typeof element === "object"
-					? element.key
-					: null;
+				element !== undefined && typeof element === "object" ?
+				element.key :
+				null;
 			let children = getChildren(
 				element ? element.key : undefined
 			).map((key) => getNode(key, parent));
@@ -105,10 +105,17 @@ function aNodeWithIdTreeDataProvider() {
 			const treeItem = new vscode.TreeItem(treeItemDetails.label, treeItemDetails.collapsibleState);
 			treeItem.iconPath = !element.parent ? vscode.ThemeIcon.File : getTreeItemIconPath();
 			treeItem.tooltip = element.parent ? `[ ${element.parent} ] ${element.key}` : element.key;
+			treeItem.command = treeItem.collapsibleState ? undefined : {
+				command: 'tree-cmd.clickItem',
+				title: "Click Item",
+				arguments: [element],
+			};
 
 			return treeItem;
 		},
-		getParent: ({ key }) => {
+		getParent: ({
+			key
+		}) => {
 			const parentKey = key;
 			return parentKey ? new Key(parentKey) : void 0;
 		},
@@ -146,10 +153,8 @@ function getTreeItem(key) {
 	return {
 		// label: { label: key }, // Using a proposed API
 		label: key,
-		collapsibleState:
-			treeElement && Object.keys(treeElement).length
-				? vscode.TreeItemCollapsibleState.Collapsed
-				: vscode.TreeItemCollapsibleState.None,
+		collapsibleState: treeElement && Object.keys(treeElement).length ?
+			vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None,
 	};
 }
 
@@ -202,4 +207,6 @@ class Key {
 	}
 }
 
-module.exports = { TreeCmd };
+module.exports = {
+	TreeCmd
+};
